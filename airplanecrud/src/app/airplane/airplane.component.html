@@ -1,0 +1,90 @@
+<div class="container">  
+  
+  <mat-card>  
+    <mat-toolbar color="accent">  
+      <div align="center" style="color:white;text-align: right;">  
+        Angular 7 - airplanes - CRUD
+      </div>    
+    </mat-toolbar>  
+  <br><br>  
+    <mat-card-content>  
+      <form [formGroup]="airplaneForm"(ngSubmit)="onFormSubmit(airplaneForm.value)">  
+              <table>  
+                <tr>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="CodAviao" matTooltip="Informe o código do avião" matInput placeholder="Código do Avião">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!airplaneForm.get('CodAviao').value && airplaneForm.get('CodAviao').touched"></span>
+                    </mat-error>
+                  </td>
+
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="Modelo" matTooltip="Informe o modelo do avião" matInput placeholder="Modelo">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!airplaneForm.get('Modelo').value && airplaneForm.get('Modelo').touched"></span>
+                    </mat-error>
+                  </td>
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="QtdePsg" matTooltip="Informe a quantidade de passageiros" matInput placeholder="QtdePsg">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!airplaneForm.get('QtdePsg').value && airplaneForm.get('QtdePsg').touched"></span>
+                    </mat-error>
+                  </td>
+
+                  <td class="tbl1">
+                    <mat-form-field class="demo-full-width">
+                      <input formControlName="DataCriacao" matTooltip="Informe a data de criação" matInput placeholder="DataCriacao">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!airplaneForm.get('DataCriacao').value && airplaneForm.get('DataCriacao').touched"></span>
+                    </mat-error>
+                  </td>
+                </tr>  
+
+                <tr>  
+                  <td></td>  
+                  <td  class="content-center">  
+                    <button type="submit" mat-raised-button color="accent"matTooltip="Clique no botão Cadastrar"[disabled]="!airplaneForm.valid">Enviar</button>      
+                    <button type="reset" mat-raised-button color="accent"matTooltip="Clique no botão Resetar" (click)="resetForm()">Resetar</button>  
+                  </td>  
+                  <td>  
+                    <p *ngIf="dataSaved" style="color:rgb(55, 0, 128);font-size:20px;font-weight:bold" Class="success" align="left">  
+                      {{message}}  
+                    </p>  
+                  </td>  
+                </tr>  
+              </table>  
+  <br><br>  
+        <table class="table" >  
+          <tr ngclass="btn-primary">
+            <th class="tbl2">Código do avião</th>
+            <th class="tbl2">Modelo</th>
+            <th class="tbl2">Quantidade de Passageiros</th>
+            <th class="tbl2">Data de Criação</th>
+            <th class="tbl2">Edita</th>
+            <th class="tbl2">Deleta</th>
+          </tr>  
+          <tr *ngFor="let airplane of allairplanes | async">
+            <td class="tbl2">{{airplane.CodAviao}}</td>
+            <td class="tbl2">{{airplane.Modelo}}</td>
+            <td class="tbl2">{{airplane.QtdePsg}}</td>
+            <td class="tbl2">{{airplane.DataCriacao}}</td>
+            <td class="tbl2">
+              <button type="button" class="btn btn-info" matTooltip="Clique no botão para Editar" (click)="loadairplaneToEdit(airplane.airplaneId)">Editar</button>
+            </td>
+            <td class="tbl2">
+              <button type="button" class="btn btn-danger" matTooltip="Clique no botão para Deletar" (click)="deleteairplane(airplane.airplaneId)">Deletar</button>
+            </td>
+          </tr>  
+    
+          </table>  
+      </form>  
+    </mat-card-content>  
+  </mat-card>  
+  </div> 
